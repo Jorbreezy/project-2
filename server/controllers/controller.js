@@ -14,7 +14,7 @@ export const createGame = (req, res, next) => {
 
   for(const element of db.games){
     if (element.title === title) {
-      return res.status(400).send('Game already exists!');
+      return res.status(409).send('Game already exists!');
     }
   }
 
@@ -31,7 +31,7 @@ export const getGameById = (req, res, next) => {
   const { id } = req.params;
 
   if (!db.games.indexOf(id)) {
-    return res.status(400).send('Game does not exist!');
+    return res.status(404).send('Game does not exist!');
   }
 
   res.locals.game = db.games[id];
@@ -78,7 +78,7 @@ export const updateGame = (req, res, next) => {
   const { title, maker, type, price } = req.body;
 
   if (!db.games.indexOf(id)) {
-    return res.status(400).send('Game does not exist!');
+    return res.status(404).send('Game does not exist!');
   }
 
   const newData = db.games.map((data, idx) => {  
@@ -100,7 +100,7 @@ export const deleteGame = (req, res, next) => {
   const { id } = req.params;
 
   if (!db.games.indexOf(id)) {
-    return res.status(400).send('Game does not exist!');
+    return res.status(404).send('Game does not exist!');
   }
 
   db.games.splice(id, 1);

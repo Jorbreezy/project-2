@@ -1,6 +1,13 @@
 import { Router } from 'express';
 
-import { createGame, getGames, updateGame, deleteGame } from '../controllers/controller';
+import { 
+  createGame,
+  getGames,
+  getMakers,
+  getGameById,
+  updateGame,
+  deleteGame
+} from '../controllers/controller';
 
 const router = Router();
 
@@ -13,6 +20,14 @@ router.post('/createGame', createGame, (req, res) => {
 router.get('/', getGames, (req, res) => {
   return res.status(200).json(res.locals.games);
 });
+
+router.get('/makers', getMakers, (req, res) => {
+  return res.status(200).json(res.locals.makers);
+});
+
+router.get('/:id', getGameById, (req,res) => {
+  return res.status(200).json(res.locals.game);
+}); 
 
 // UPDATE
 router.patch('/:id', updateGame, (req, res) => {

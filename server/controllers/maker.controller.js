@@ -12,7 +12,6 @@ export const makerExists = (name) => {
   return false;
 };
 
-
 export const createMaker = (req, res, next) => {
   const { name } = req.body;
 
@@ -47,7 +46,7 @@ export const updateMaker = (req, res, next) => {
   const { id } = req.params;
   const { name } = req.body;
 
-  db.makers[id] = { name };
+  db.makers[id] = name;
 
   return next();
 } 

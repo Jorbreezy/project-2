@@ -4,7 +4,7 @@ import games from './routes/games';
 import makers from './routes/maker';
 
 const app = express();
-const PORT = 3000;
+export const PORT = 3000;
 
 // USE
 app.use(express.json())
@@ -17,4 +17,6 @@ app.use((err, req, res, next) => {
   return res.status(500).send('Internal Server Error')
 });
 
-app.listen(PORT, () => `Listening on port ${PORT}`);
+// app.listen(PORT, () => `Listening on port ${PORT}`);
+
+export default app;

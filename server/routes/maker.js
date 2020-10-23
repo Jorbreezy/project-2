@@ -26,12 +26,12 @@ router.get('/makers/:id', getMakerById, (req, res) => {
 
 // UPDATE
 router.patch('/makers/:id', updateMaker, (req, res) => {
-  return res.status(200).send('Update Successfully');
+  return res.status(200).send('Update Successful');
 });
 
 // DELETE
 router.delete('/makers/:id', deleteMaker, (req, res) => {
-  return res.status(200).send('Delete Successfully');
+  return res.status(200).send('Delete Successful');
 });
 
 

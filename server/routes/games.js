@@ -3,11 +3,10 @@ import { Router } from 'express';
 import { 
   createGame,
   getGames,
-  getMakers,
   getGameById,
   updateGame,
   deleteGame
-} from '../controllers/controller';
+} from '../controllers/games.controller';
 
 const router = Router();
 
@@ -19,10 +18,6 @@ router.post('/games', createGame, (req, res) => {
 // READ
 router.get('/games', getGames, (req, res) => {
   return res.status(200).json(res.locals.games);
-});
-
-router.get('/makers', getMakers, (req, res) => {
-  return res.status(200).json(res.locals.makers);
 });
 
 router.get('/games/:id', getGameById, (req,res) => {

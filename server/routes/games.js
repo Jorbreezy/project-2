@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import validateTypes from '../controllers/validateTypes';
+
 import { 
   createGame,
   getGames,
@@ -11,7 +13,7 @@ import {
 const router = Router();
 
 // CREATE
-router.post('/games', createGame, (req, res) => {
+router.post('/games', validateTypes, createGame, (req, res) => {
   return res.status(200).send('Created Successfully');
 });
 
@@ -25,7 +27,7 @@ router.get('/games/:id', getGameById, (req,res) => {
 }); 
 
 // UPDATE
-router.patch('/games/:id', updateGame, (req, res) => {
+router.patch('/games/:id', validateTypes, updateGame, (req, res) => {
   return res.status(200).send('Update Successful');
 });
 

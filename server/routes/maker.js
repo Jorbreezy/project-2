@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import validateTypes from '../controllers/validateTypes';
+
 import { 
   createMaker,
   getMakers,
@@ -11,7 +13,7 @@ import {
 const router = Router();
 
 // CREATE
-router.post('/makers', createMaker, (req, res) => {
+router.post('/makers', validateTypes, createMaker, (req, res) => {
   return res.status(200).send('Created Successfully');
 });
 
@@ -25,7 +27,7 @@ router.get('/makers/:id', getMakerById, (req, res) => {
 }); 
 
 // UPDATE
-router.patch('/makers/:id', updateMaker, (req, res) => {
+router.patch('/makers/:id', validateTypes, updateMaker, (req, res) => {
   return res.status(200).send('Update Successful');
 });
 

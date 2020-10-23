@@ -4,7 +4,7 @@ import app from '../server/index';
 
 const request = supertest(app);
 
-describe('Test Makers Endpoints', () => {
+describe('Test Makers Endpoints GOOD', () => {
   
   it('Should return status 200', async () => {
     const res = await request.get('/api/makers');
@@ -77,5 +77,35 @@ describe('Test Makers Endpoints', () => {
   afterAll(done => {
     done();
   });
+
+});
+
+describe('Testing games endpoints BAD', () => {
+  const endpoint = '/api/makers';
+
+  it('Should return status 406', async () => {
+    const res = await request
+      .post(endpoint)
+      .send({
+       name: 'Bluepoint'
+      });
+
+    expect(res.status).toBe(406);
+    expect(res.text).toBe('Maker already exists!');
+  }); 
+
+  it('Should return status 400', async () => {
+    const res = await request
+      .post(endpoint)
+      .send({
+        name: 123
+      });
+
+      expect(res.status).toBe(400);
+  });
+
+  afterAll(done => {
+    done();
+  })
 
 });

@@ -4,7 +4,7 @@ import app from '../server/index';
 
 const request = supertest(app);
 
-describe('Test Games Endpoints', () => {
+describe('Test Games Endpoints GOOD', () => {
   
   it('Should return status 200', async () => {
     const res = await request.get('/api/games');
@@ -98,6 +98,38 @@ describe('Test Games Endpoints', () => {
 
   afterAll(done => {
     done();
+  });
+
+});
+
+describe('Testing games endpoints BAD', () => {
+  const endpoint = '/api/games';
+
+  it('Should return status 406', async () => {
+    const res = await request
+      .post(endpoint)
+      .send({
+        title: 'Demon Souls',
+        maker: 'Bluepoint',
+        type: 'RPG',
+        price: 40
+      });
+
+    expect(res.status).toBe(406);
+    expect(res.text).toBe('Game already exists!');
+  }); 
+
+  it('Should return status 400', async () => {
+    const res = await request
+      .post(endpoint)
+      .send({
+        title: 'Demon',
+        maker: 23,
+        type: 'RPG',
+        price: '40'
+      });
+
+      expect(res.status).toBe(400);
   });
 
 });

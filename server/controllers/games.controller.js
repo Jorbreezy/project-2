@@ -28,7 +28,7 @@ export const createGame = (req, res, next) => {
     title,
     maker: brand,
     type,
-    price 
+    price: parseInt(price)
   };
 
   db.games[index] = newGame;

@@ -5,9 +5,11 @@ import app from '../server/index';
 const request = supertest(app);
 
 describe('Test Makers Endpoints GOOD', () => {
+  const endpoint = '/api/makers';
+
   
   it('Should return status 200', async () => {
-    const res = await request.get('/api/makers');
+    const res = await request.get(endpoint);
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual({});
@@ -15,7 +17,7 @@ describe('Test Makers Endpoints GOOD', () => {
 
   it('Should create a new maker', async () => {
     const res = await request
-      .post('/api/makers')
+      .post(endpoint)
       .send({
         name: 'FromSoft'
       });
@@ -25,7 +27,7 @@ describe('Test Makers Endpoints GOOD', () => {
   });
 
   it('Should return object of makers', async () => {
-    const res = await request.get('/api/makers');
+    const res = await request.get(endpoint);
 
     const expectedData = {
       '0':'FromSoft'
@@ -36,21 +38,21 @@ describe('Test Makers Endpoints GOOD', () => {
 
   it('Should get data by id', async () => {
     await request
-      .post('/api/makers')
+      .post(endpoint)
       .send({ name: 'Treyarch' });
 
     const expectedData = 'Treyarch'
 
     const id = 1;
 
-    const res = await request.get(`/api/makers/${id}`);
+    const res = await request.get(`${endpoint}/${id}`);
 
     expect(res.body).toEqual(expectedData);
   });
 
   it('Should update successfully', async () => {
     const res = await request
-      .patch('/api/makers/1')
+      .patch(`${endpoint}/1`)
       .send({
         name: 'Bluepoint'
       })
@@ -61,10 +63,10 @@ describe('Test Makers Endpoints GOOD', () => {
 
   it('Should delete successfully', async () => {
     const res = await request
-      .delete('/api/makers/0');
+      .delete(`${endpoint}/0`);
 
     const response = await request
-      .get('/api/makers')
+      .get(endpoint)
 
     const expectedData = {
       "1": "Bluepoint"

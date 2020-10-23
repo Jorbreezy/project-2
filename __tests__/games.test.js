@@ -5,9 +5,10 @@ import app from '../server/index';
 const request = supertest(app);
 
 describe('Test Games Endpoints GOOD', () => {
+  const endpoint = '/api/games'
   
   it('Should return status 200', async () => {
-    const res = await request.get('/api/games');
+    const res = await request.get(endpoint);
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual({});
@@ -15,7 +16,7 @@ describe('Test Games Endpoints GOOD', () => {
 
   it('Should create a new game', async () => {
     const res = await request
-      .post('/api/games')
+      .post(endpoint)
       .send({
         title: 'Cold War',
         maker: 'Treyarch',
@@ -28,7 +29,7 @@ describe('Test Games Endpoints GOOD', () => {
   });
 
   it('Should return object of games', async () => {
-    const res = await request.get('/api/games');
+    const res = await request.get(endpoint);
     const expectedData = {
       '0': {
         title: 'Cold War',
@@ -43,7 +44,7 @@ describe('Test Games Endpoints GOOD', () => {
 
   it('Should get data by id', async () => {
     await request
-      .post('/api/games')
+      .post(endpoint)
       .send({
         title: 'Dark Souls Remastered',
         maker: 'FromSoft',
@@ -67,7 +68,7 @@ describe('Test Games Endpoints GOOD', () => {
 
   it('Should update successfully', async () => {
     const res = await request
-      .patch('/api/games/1')
+      .patch(`${endpoint}/1`)
       .send({
         title: 'Demon Souls'
       })
@@ -78,7 +79,7 @@ describe('Test Games Endpoints GOOD', () => {
 
   it('Should delete successfully', async () => {
     const res = await request
-      .delete('/api/games/0');
+      .delete(`${endpoint}/0`);
 
     const response = await request
       .get('/api/games')

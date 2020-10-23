@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { 
   createMaker,
   getMakers,
+  getMakerById,
   updateMaker,
   deleteMaker
 } from '../controllers/maker.controller';
@@ -19,9 +20,9 @@ router.get('/makers', getMakers, (req, res) => {
   return res.status(200).json(res.locals.makers);
 });
 
-//router.get('/games/:id', getGameById, (req,res) => {
-//  return res.status(200).json(res.locals.game);
-//}); 
+router.get('/makers/:id', getMakerById, (req, res) => {
+  return res.status(200).json(res.locals.maker);
+}); 
 
 // UPDATE
 router.patch('/makers/:id', updateMaker, (req, res) => {

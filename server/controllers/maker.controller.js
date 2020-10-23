@@ -22,7 +22,7 @@ export const createMaker = (req, res, next) => {
     return res.status(406).send('Maker already exists!');
   } 
  
-  db.makers[index] = newMaker;
+  db.makers[index] = name;
 
   return next();
 }
@@ -34,6 +34,13 @@ export const getMakers = (req, res, next) => {
   return next();
 }
 
+export const getMakerById = (req, res, next) => {
+  const { id } = req.params;
+  
+  res.locals.maker = db.makers[id];
+
+  return next();
+}
 
 // UPDATE
 export const updateMaker = (req, res, next) => {
@@ -44,7 +51,6 @@ export const updateMaker = (req, res, next) => {
 
   return next();
 } 
-
 
 // DELETE
 export const deleteMaker = (req, res, next) => {

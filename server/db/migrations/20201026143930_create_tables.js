@@ -29,7 +29,7 @@ exports.up = (knex) => {
 
 exports.down = (knex) => {
   return knex.schema
+    .dropTable('games')
     .dropTable('makers')
-    .dropTable('types')
-    .dropTable('games');
+    .dropTable('types');
 }

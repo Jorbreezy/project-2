@@ -2,7 +2,7 @@
 const path = require('path');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: path.resolve(__dirname, '../.env')});
+dotenv.config({ path: path.resolve(__dirname, './.env')});
 
 const { 
   DATABASE,
@@ -24,10 +24,10 @@ const config = {
       port: DB_PORT
     },
     migrations: {
-      directory: `${__dirname}/db/migrations`,
+      directory: path.join(__dirname, '/server/db/migrations'),
     },
     seeds: {
-      directory: `${__dirname}/db/seeds`,
+      directory: path.join(__dirname, '/server/db/seeds'),
     },
   }
 };

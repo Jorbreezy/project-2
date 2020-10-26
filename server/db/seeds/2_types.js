@@ -5,15 +5,15 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('types').insert([
-        {id: 1, name: 'RPG'},
-        {id: 2, name: 'FPS'},
-        {id: 3, name: 'Action'},
-        {id: 4, name: 'Adventure'},
-        {id: 5, name: 'Sports'},
-        {id: 6, name: 'Strategy'},
-        {id: 7, name: 'Indie'},
-        {id: 8, name: 'Racing'},
-        {id: 9, name: 'Simulation'}
+        {name: 'RPG'},
+        {name: 'FPS'},
+        {name: 'Action'},
+        {name: 'Adventure'},
+        {name: 'Sports'},
+        {name: 'Strategy'},
+        {name: 'Indie'},
+        {name: 'Racing'},
+        {name: 'Simulation'}
       ]);
     });
 };

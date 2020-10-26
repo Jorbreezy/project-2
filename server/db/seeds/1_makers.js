@@ -5,9 +5,9 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('makers').insert([
-        {id: 1, name: 'FromSoft'},
-        {id: 2, name: 'Treyarch'},
-        {id: 3, name: 'Insomniac Games'}
+        {name: 'FromSoft'},
+        {name: 'Treyarch'},
+        {name: 'Insomniac Games'}
       ]);
     });
 };

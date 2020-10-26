@@ -10,7 +10,8 @@
     "build": "babel server --out-dir build",
     "db:migrate": "knex migrate:latest",
     "db:seeds": "knex seed:run",
-    "db:setup": "npm run db:migrate && npm run db:seeds"
+    "db:setup": "npm run db:migrate && npm run db:seeds",
+    "db:rollback": "knex migrate:rollback"
   },
   "author": "Jordan Kelly",
   "license": "ISC",

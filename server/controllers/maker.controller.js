@@ -1,63 +1,83 @@
 import db from '../db/db';
 
 // CREATE
-
-export const makerExists = (name) => {
-  for (const key in db.makers) {
-    if (db.makers[key] === name) {
-      return true;
-    }
-  }
-
-  return false;
-};
-
-export const createMaker = (req, res, next) => {
+export const createMaker = async (req, res, next) => {
   const { name } = req.body;
 
-  const index = Object.keys(db.makers).length;
+  try {
+    await db('makers')
+      .insert({ name });
 
-  if (makerExists(name)) {
-    return res.status(406).send('Maker already exists!');
-  } 
- 
-  db.makers[index] = name;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
 
-  return next();
 }
 
 // READ
-export const getMakers = (req, res, next) => {
-  res.locals.makers = db.makers;
+export const getMakers = async (req, res, next) => {
+  try {
+    const makerQuery = db
+      .select('*')
+      .from('makers');
 
-  return next();
+    res.locals.makers = await makerQuery;
+
+    return next();
+  } catch (err) {
+    return next(err);
+  }
 }
 
-export const getMakerById = (req, res, next) => {
+export const getMakerById = async (req, res, next) => {
   const { id } = req.params;
-  
-  res.locals.maker = db.makers[id];
 
-  return next();
+  try {
+    const makerQuery = db
+      .select('*')
+      .from('makers')
+      .where('id', id);
+
+    res.locals.maker = await makerQuery;
+
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+
 }
 
 // UPDATE
-export const updateMaker = (req, res, next) => {
+export const updateMaker = async (req, res, next) => {
   const { id } = req.params;
   const { name } = req.body;
 
-  db.makers[id] = name;
+  try {
+    await db('makers')
+      .update({ name })
+      .where('id', id);
 
-  return next();
-} 
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+
+}
 
 // DELETE
-export const deleteMaker = (req, res, next) => {
+export const deleteMaker = async (req, res, next) => {
   const { id } = req.params;
 
-  delete db.makers[id];
+  try {
+    await db('makers')
+      .del()
+      .where('id', id);
 
-  return next();
+    return next();
+  } catch (err) {
+    return next(err);
+  }
 }
 
 

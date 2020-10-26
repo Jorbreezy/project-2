@@ -1,3 +1,5 @@
-import app, { PORT } from './index';
+const { PORT, CLIENT } = process.env;
 
-app.listen(PORT, () => `Listening on port ${PORT}`);
+import app from './index';
+
+ app.listen(PORT, () => `Listening on port ${PORT}`);

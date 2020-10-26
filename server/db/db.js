@@ -1,6 +1,7 @@
-const db = {
-  games: {},
-  makers: {}
-};
+import knex from 'knex';
+import knexfile from '../knexfile';
 
-export default db;
+const env = 'development';
+const configOptions = knexfile[env];
+
+export default knex(configOptions);

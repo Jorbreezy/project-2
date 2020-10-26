@@ -1,122 +1,105 @@
 import db from '../db/db';
-import { makerExists } from './maker.controller';
-
 
 // CREATE
 
-export const createGame = (req, res, next) => {
+export const createGame = async (req, res, next) => {
   const { title, maker, type, price } = req.body;
-  let brand = maker;
 
-  const index = Object.keys(db.games).length;
-  const mlength = Object.keys(db.makers).length;
+  try {
+    await db('games')
+      .insert({ maker, price, title, type });
 
-  for (const key in db.games) {
-    if (db.games[key].title === title) {
-      return res.status(406).send('Game already exists!');
-    }
+    return next();
+  } catch (err) {
+    return next(err);
   }
-
-  if (makerExists(maker)) {
-    brand = Object.keys(db.makers).find(key => db.makers[key] === maker);
-  } else {
-    db.makers[mlength] = maker;
-    brand = `${mlength}`;
-  }
-
-  const newGame = { 
-    title,
-    maker: brand,
-    type,
-    price: parseInt(price)
-  };
-
-  db.games[index] = newGame;
-
-  return next();
 }
 
 // READ
 
-export const getGameById = (req, res, next) => {
+export const getGameById = async (req, res, next) => {
   const { id } = req.params;
 
-  if (!db.games[id]) {
-    return res.status(404).send('Game does not exist!');
+  try {
+    const gameQuery = db
+      .select('games.*', 'makers.name AS maker', 'type.name AS type')
+      .from('games')
+      .leftJoin('makers', 'games.maker', 'makers.id')
+      .leftJoin('type', 'games.type', 'type.id')
+      .where('games.id', id);
+
+    res.locals.game = await gameQuery;
+
+    return next();
+  } catch (err) {
+    return next(err);
   }
 
-  res.locals.game = db.games[id];
-
-  return next();
 }
 
-export const getGames = (req, res, next) => { 
+export const getGames = async (req, res, next) => {
   const { title, maker, type } = req.query;
 
-  let games = db.games;
+  try {
+    let games = db
+      .select('games.*', 'makers.name AS maker', 'type.name AS type')
+      .from('games')
+      .leftJoin('makers', 'games.maker', 'makers.id')
+      .leftJoin('type', 'games.type', 'type.id');
 
-  if (title) {
-    games = filterGames(games, 'title', title);
-  }
-
-  if (maker) {
-    games = filterGames(games, 'maker', maker);
-  }
-
-  if (type) {
-    games = filterGames(games, 'type', type);
-  }
-
-  res.locals.games = games;
-
-  return next();
-}
-
-const filterGames = (data, field, value) => {
-  const results = {};
-  let length = 0;
-
-  for (const key in data) {
-    if (data[key][field].includes(value)) {
-      results[length++] = data[key];
+    if (title) {
+      games.where('games.title', 'ilike', `%${title}%`);
     }
-  }
 
-  return results;
+    if (maker) {
+      games.where('makers.name', 'ilike', `%${maker}%`);
+    }
+
+    if (type) {
+      games.where('type.name', 'ilike', `%${type}%`);
+    }
+
+    games.orderBy('games.id');
+
+    res.locals.games = await games;
+
+    return next();
+  } catch (err) {
+    return next(err);
+  }
 }
 
 // UPDATE
 
-export const updateGame = (req, res, next) => {
+export const updateGame = async (req, res, next) => {
   const { id } = req.params;
   const { title, maker, type, price } = req.body;
 
-  if (!db.games[id]) {
-    return res.status(404).send('Game does not exist!');
+  try {
+    await db('games')
+      .update({ title, maker, type, price })
+      .where('id', id)
+
+    return next();
+  } catch (err) {
+    return next(err);
   }
 
-  const newData = {
-    title: title || db.games[id].title,
-    maker: maker || db.games[id].maker,
-    type: type || db.games[id].type,
-    price: price || db.games[id].price
-  }
-
-  db.games[id] = newData;
-
-  return next();
 }
 
 // DELETE
 
-export const deleteGame = (req, res, next) => {
+export const deleteGame = async (req, res, next) => {
   const { id } = req.params;
 
-  if (!db.games[id]) {
-    return res.status(404).send('Game does not exist!');
-  }
+  try {
+    await db('games')
+      .del()
+      .where('id', id);
 
-  delete db.games[id];
+    return next();
+  } catch (err) {
+    return next(err);
+  } 
 
-  return next();
 }

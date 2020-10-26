@@ -2,17 +2,23 @@
   "name": "project-2",
   "version": "1.0.0",
   "description": "",
-  "main": "build/index.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "jest",
-    "test:watch":"jest --watch",
+    "test:watch": "jest --watch",
     "start": "nodemon --exec babel-node server/server.js",
-    "build": "babel server --out-dir build"
+    "build": "babel server --out-dir build",
+    "db:migrate": "knex migrate:latest",
+    "db:seeds": "knex seed:run",
+    "db:setup":"npm run db:migrate && npm run db:seeds"
   },
   "author": "Jordan Kelly",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "knex": "^0.21.6",
+    "pg": "^8.4.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",

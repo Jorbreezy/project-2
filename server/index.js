@@ -7,6 +7,7 @@ import express from 'express';
 
 import games from './routes/games';
 import makers from './routes/maker';
+import errorHandler from '../utils/errorHandler';
 
 const app = express();
 
@@ -14,10 +15,7 @@ const app = express();
 app.use(express.json())
 app.use('/api', games, makers);
 
-// Default Error Handler 
-app.use((err, req, res, next) => {
-  console.log(err);
-  return res.status(500).send('Internal Server Error')
-});
+// Default Error Handler
+app.use(errorHandler);
 
 export default app;

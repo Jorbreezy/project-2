@@ -22,10 +22,10 @@ export const getGameById = async (req, res, next) => {
 
   try {
     const gameQuery = db
-      .select('games.*', 'makers.name AS maker', 'type.name AS type')
+      .select('games.*', 'makers.name AS maker', 'types.name AS type')
       .from('games')
       .leftJoin('makers', 'games.maker', 'makers.id')
-      .leftJoin('type', 'games.type', 'type.id')
+      .leftJoin('types', 'games.type', 'types.id')
       .where('games.id', id);
 
     res.locals.game = await gameQuery;
@@ -42,10 +42,10 @@ export const getGames = async (req, res, next) => {
 
   try {
     let games = db
-      .select('games.*', 'makers.name AS maker', 'type.name AS type')
+      .select('games.*', 'makers.name AS maker', 'types.name AS type')
       .from('games')
       .leftJoin('makers', 'games.maker', 'makers.id')
-      .leftJoin('type', 'games.type', 'type.id');
+      .leftJoin('types', 'games.type', 'types.id');
 
     if (title) {
       games.where('games.title', 'ilike', `%${title}%`);
@@ -56,7 +56,7 @@ export const getGames = async (req, res, next) => {
     }
 
     if (type) {
-      games.where('type.name', 'ilike', `%${type}%`);
+      games.where('types.name', 'ilike', `%${type}%`);
     }
 
     games.orderBy('games.id');
@@ -84,7 +84,6 @@ export const updateGame = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-
 }
 
 // DELETE
@@ -101,5 +100,4 @@ export const deleteGame = async (req, res, next) => {
   } catch (err) {
     return next(err);
   } 
-
 }

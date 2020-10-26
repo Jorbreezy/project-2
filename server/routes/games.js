@@ -4,7 +4,8 @@ import {
   createGame,
   getGameById,
   getGames,
-  updateGame
+  updateGame,
+  deleteGame
 } from '../controllers/games.controller';
 
 const router = Router();
@@ -28,9 +29,9 @@ router.patch('/games/:id', updateGame, (req, res) => {
   return res.status(200).send('Update Successful');
 });
 
-//// DELETE
-//router.delete('/games/:id', deleteGame, (req, res) => {
-//  return res.status(200).send('Delete Successful');
-//});
+// DELETE
+router.delete('/games/:id', deleteGame, (req, res) => {
+  return res.status(200).send('Delete Successful');
+});
 
 export default router;

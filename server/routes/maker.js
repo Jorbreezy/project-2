@@ -1,7 +1,5 @@
 import { Router } from 'express';
 
-import validateTypes from '../controllers/validateTypes';
-
 import { 
   createMaker,
   getMakers,

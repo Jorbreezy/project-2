@@ -10,12 +10,13 @@ const {
   DB_USER,
   DB_PASSWORD,
   DB_HOST,
-  DB_PORT
+  DB_PORT,
+  CLIENT
 } = process.env;
 
 const config = {
   development: {
-    client: 'pg',
+    client: CLIENT,
     connection: {
       database: DATABASE,
       user: DB_USER,

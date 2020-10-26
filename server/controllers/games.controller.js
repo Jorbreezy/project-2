@@ -26,7 +26,8 @@ export const getGameById = async (req, res, next) => {
       .from('games')
       .leftJoin('makers', 'games.maker', 'makers.id')
       .leftJoin('types', 'games.type', 'types.id')
-      .where('games.id', id);
+      .where('games.id', id)
+      .first();
 
     res.locals.game = await gameQuery;
 

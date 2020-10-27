@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:watch": "jest --watch",
     "start": "nodemon --exec babel-node server/server.js",
     "build": "babel server --out-dir build",

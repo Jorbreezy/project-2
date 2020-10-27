@@ -12,7 +12,7 @@ const router = Router();
 
 // CREATE
 router.post('/makers', createMaker, (req, res) => {
-  return res.status(200).send('Created Successfully');
+  return res.status(201).send('Created Successfully');
 });
 
 // READ
@@ -31,7 +31,7 @@ router.patch('/makers/:id', updateMaker, (req, res) => {
 
 // DELETE
 router.delete('/makers/:id', deleteMaker, (req, res) => {
-  return res.status(200).send('Delete Successful');
+  return res.status(204).send('Delete Successful');
 });
 
 

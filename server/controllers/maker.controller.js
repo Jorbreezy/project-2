@@ -34,12 +34,19 @@ export const getMakerById = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const makerQuery = db
+    const makerQuery = await db
       .select('*')
       .from('makers')
-      .where('id', id);
+      .where('id', id)
+      .first();
 
-    res.locals.maker = await makerQuery;
+    if (makerQuery === undefined) {
+      const error = new Error('Maker Not Found');
+      error.code = 'NOT_FOUND';
+      throw error;
+    }
+
+    res.locals.maker = makerQuery;
 
     return next();
   } catch (err) {

@@ -1,5 +1,6 @@
 import supertest from 'supertest';
 
+import knex from '../server/db/db';
 import app from '../server/index';
 
 const request = supertest(app);
@@ -7,8 +8,14 @@ const request = supertest(app);
 describe('Test Games Endpoints', () => {
   const endpoint = '/api/games';
 
-  beforeAll(done => {
-    done();
+  beforeAll(async () => {
+    return await knex.migrate.latest()
+    .then(() => knex.seed.run());
+  });
+
+  afterAll(async () => {
+    return await knex.migrate.rollback()
+    .then(() => knex.destroy());
   });
 
   it('Should post game and return with 201', async () => {
@@ -35,7 +42,6 @@ describe('Test Games Endpoints', () => {
     const res = await request.get(endpoint);
 
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveLength(7);
   }); 
 
   it('Should return StatusCode 500', async () => {
@@ -51,7 +57,7 @@ describe('Test Games Endpoints', () => {
     expect(res.statusCode).toBe(500);
   });
 
-  it('Should delete a post', async () => {
+  it('Should delete a game', async () => {
     const res = await request.delete(endpoint + '/1');
 
     expect(res.statusCode).toBe(204);
@@ -61,10 +67,6 @@ describe('Test Games Endpoints', () => {
     const res = await request.get(endpoint + '/1');
 
     expect(res.statusCode).toBe(404);
-  })
-
-  afterAll(done => {
-    done();
   });
 
 });

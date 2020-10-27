@@ -1,13 +1,10 @@
-
-exports.seed = function(knex) {
+exports.seed = (knex) =>
   // Deletes ALL existing entries
-  return knex('makers').del()
-    .then(function () {
+  knex('makers').del()
+    .then(() =>
       // Inserts seed entries
-      return knex('makers').insert([
-        {name: 'FromSoft'},
-        {name: 'Treyarch'},
-        {name: 'Insomniac Games'}
-      ]);
-    });
-};
+      knex('makers').insert([
+        { name: 'FromSoft' },
+        { name: 'Treyarch' },
+        { name: 'Insomniac Games' },
+      ]));

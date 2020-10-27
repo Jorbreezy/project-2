@@ -1,19 +1,16 @@
-
-exports.seed = function(knex) {
+exports.seed = (knex) =>
   // Deletes ALL existing entries
-  return knex('types').del()
-    .then(function () {
+  knex('types').del()
+    .then(() =>
       // Inserts seed entries
-      return knex('types').insert([
-        {name: 'RPG'},
-        {name: 'FPS'},
-        {name: 'Action'},
-        {name: 'Adventure'},
-        {name: 'Sports'},
-        {name: 'Strategy'},
-        {name: 'Indie'},
-        {name: 'Racing'},
-        {name: 'Simulation'}
-      ]);
-    });
-};
+      knex('types').insert([
+        { name: 'RPG' },
+        { name: 'FPS' },
+        { name: 'Action' },
+        { name: 'Adventure' },
+        { name: 'Sports' },
+        { name: 'Strategy' },
+        { name: 'Indie' },
+        { name: 'Racing' },
+        { name: 'Simulation' },
+      ]));

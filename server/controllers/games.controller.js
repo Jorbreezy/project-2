@@ -3,17 +3,21 @@ import db from '../db/db';
 // CREATE
 
 export const createGame = async (req, res, next) => {
-  const { title, maker, type, price } = req.body;
+  const {
+    title, maker, type, price,
+  } = req.body;
 
   try {
     await db('games')
-      .insert({ maker, price, title, type });
+      .insert({
+        maker, price, title, type,
+      });
 
     return next();
   } catch (err) {
     return next(err);
   }
-}
+};
 
 // READ
 
@@ -41,14 +45,13 @@ export const getGameById = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-
-}
+};
 
 export const getGames = async (req, res, next) => {
   const { title, maker, type } = req.query;
 
   try {
-    let games = db
+    const games = db
       .select('games.*', 'makers.name AS maker', 'types.name AS type')
       .from('games')
       .leftJoin('makers', 'games.maker', 'makers.id')
@@ -74,24 +77,28 @@ export const getGames = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-}
+};
 
 // UPDATE
 
 export const updateGame = async (req, res, next) => {
   const { id } = req.params;
-  const { title, maker, type, price } = req.body;
+  const {
+    title, maker, type, price,
+  } = req.body;
 
   try {
     await db('games')
-      .update({ title, maker, type, price })
-      .where('id', id)
+      .update({
+        title, maker, type, price,
+      })
+      .where('id', id);
 
     return next();
   } catch (err) {
     return next(err);
   }
-}
+};
 
 // DELETE
 
@@ -106,5 +113,5 @@ export const deleteGame = async (req, res, next) => {
     return next();
   } catch (err) {
     return next(err);
-  } 
-}
+  }
+};

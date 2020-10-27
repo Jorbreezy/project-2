@@ -12,8 +12,7 @@ export const createMaker = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-
-}
+};
 
 // READ
 export const getMakers = async (req, res, next) => {
@@ -28,7 +27,7 @@ export const getMakers = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-}
+};
 
 export const getMakerById = async (req, res, next) => {
   const { id } = req.params;
@@ -52,8 +51,7 @@ export const getMakerById = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-
-}
+};
 
 // UPDATE
 export const updateMaker = async (req, res, next) => {
@@ -69,8 +67,7 @@ export const updateMaker = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-
-}
+};
 
 // DELETE
 export const deleteMaker = async (req, res, next) => {
@@ -85,7 +82,4 @@ export const deleteMaker = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-}
-
-
-
+};

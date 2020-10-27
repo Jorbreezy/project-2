@@ -58,13 +58,13 @@ describe('Test Games Endpoints', () => {
   });
 
   it('Should delete a game', async () => {
-    const res = await request.delete(endpoint + '/1');
+    const res = await request.delete(endpoint + '/7');
 
     expect(res.statusCode).toBe(204);
   });
 
   it('Should respond with 404 not found', async () => {
-    const res = await request.get(endpoint + '/1');
+    const res = await request.get(endpoint + '/7');
 
     expect(res.statusCode).toBe(404);
   });

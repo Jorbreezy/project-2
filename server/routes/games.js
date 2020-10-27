@@ -12,7 +12,7 @@ const router = Router();
 
 // CREATE
 router.post('/games', createGame, (req, res) => {
-  return res.status(200).send('Created Successfully');
+  return res.status(201).send('Created Successfully');
 });
 
 // READ
@@ -31,7 +31,7 @@ router.patch('/games/:id', updateGame, (req, res) => {
 
 // DELETE
 router.delete('/games/:id', deleteGame, (req, res) => {
-  return res.status(200).send('Delete Successful');
+  return res.status(204).send('Delete Successful');
 });
 
 export default router;

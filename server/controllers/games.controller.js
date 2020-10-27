@@ -21,7 +21,7 @@ export const getGameById = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const gameQuery = db
+    const gameQuery = await db
       .select('games.*', 'makers.name AS maker', 'types.name AS type')
       .from('games')
       .leftJoin('makers', 'games.maker', 'makers.id')
@@ -29,7 +29,13 @@ export const getGameById = async (req, res, next) => {
       .where('games.id', id)
       .first();
 
-    res.locals.game = await gameQuery;
+    if (gameQuery === undefined) {
+      const error = new Error('Game Not Found');
+      error.code = 'NOT_FOUND';
+      throw error;
+    }
+
+    res.locals.game = gameQuery;
 
     return next();
   } catch (err) {

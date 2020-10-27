@@ -35,13 +35,33 @@ describe('Test Games Endpoints', () => {
   it ('Should fetch a single game', async () => {
     const res = await request.get(endpoint + '/1');
 
+    const expectedData = { 
+      id: 1,
+      title: 'Dark Souls',
+      price: 40,
+      maker: 'FromSoft',
+      type: 'RPG' 
+    };
+
     expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual(expectedData);
   });
 
   it ('Should fetch all games', async () => {
     const res = await request.get(endpoint);
 
+    const expectedData = [
+      { id: 1, title: 'Dark Souls', price: 40, maker: 'FromSoft', type: 'RPG' },
+      { id: 2, title: 'Dark Souls 2', price: 40, maker: 'FromSoft', type: 'RPG' },
+      { id: 3, title: 'Black Ops 3', price: 40, maker: 'Treyarch', type: 'FPS' },
+      { id: 4, title: 'Cold War', price: 60, maker: 'Treyarch', type: 'FPS' },
+      { id: 5, title: 'Spider Man Miles Morales', price: 70, maker: 'Insomniac Games', type: 'Action' },
+      { id: 6, title: 'Spider Man', price: 60, maker: 'Insomniac Games', type: 'Action' },
+      { id: 7, title: 'Bloodborne', price: 60, maker: 'FromSoft', type: 'RPG' }
+    ];
+    
     expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual(expectedData);
   }); 
 
   it('Should return StatusCode 500', async () => {
@@ -68,5 +88,4 @@ describe('Test Games Endpoints', () => {
 
     expect(res.statusCode).toBe(404);
   });
-
 });

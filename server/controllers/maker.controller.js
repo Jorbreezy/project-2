@@ -1,6 +1,5 @@
 import db from '../db/db';
 
-// CREATE
 export const createMaker = async (req, res, next) => {
   const { name } = req.body;
 
@@ -14,7 +13,6 @@ export const createMaker = async (req, res, next) => {
   }
 };
 
-// READ
 export const getMakers = async (req, res, next) => {
   try {
     const makerQuery = db
@@ -53,7 +51,6 @@ export const getMakerById = async (req, res, next) => {
   }
 };
 
-// UPDATE
 export const updateMaker = async (req, res, next) => {
   const { id } = req.params;
   const { name } = req.body;
@@ -69,7 +66,6 @@ export const updateMaker = async (req, res, next) => {
   }
 };
 
-// DELETE
 export const deleteMaker = async (req, res, next) => {
   const { id } = req.params;
 

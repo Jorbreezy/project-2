@@ -1,7 +1,5 @@
 import db from '../db/db';
 
-// CREATE
-
 export const createGame = async (req, res, next) => {
   const {
     title, maker, type, price,
@@ -18,8 +16,6 @@ export const createGame = async (req, res, next) => {
     return next(err);
   }
 };
-
-// READ
 
 export const getGameById = async (req, res, next) => {
   const { id } = req.params;
@@ -79,8 +75,6 @@ export const getGames = async (req, res, next) => {
   }
 };
 
-// UPDATE
-
 export const updateGame = async (req, res, next) => {
   const { id } = req.params;
   const {
@@ -99,8 +93,6 @@ export const updateGame = async (req, res, next) => {
     return next(err);
   }
 };
-
-// DELETE
 
 export const deleteGame = async (req, res, next) => {
   const { id } = req.params;

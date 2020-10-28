@@ -1,8 +1,6 @@
 exports.seed = (knex) =>
-  // Deletes ALL existing entries
   knex('games').del()
     .then(() =>
-      // Inserts seed entries
       knex('games').insert([
         {
           title: 'Dark Souls', price: 40, maker: 1, type: 1,

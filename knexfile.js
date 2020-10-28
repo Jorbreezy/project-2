@@ -2,16 +2,16 @@
 const path = require('path');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: path.resolve(__dirname, './.env')});
+dotenv.config({ path: path.resolve(__dirname, './.env') });
 
-const { 
+const {
   DATABASE,
   DB_USER,
   DB_PASSWORD,
   DB_HOST,
   DB_PORT,
   CLIENT,
-  DATABASE2
+  DATABASE2,
 } = process.env;
 
 const config = {
@@ -22,7 +22,7 @@ const config = {
       user: DB_USER,
       password: DB_PASSWORD,
       host: DB_HOST,
-      port: DB_PORT
+      port: DB_PORT,
     },
     migrations: {
       directory: path.join(__dirname, '/server/db/migrations'),
@@ -38,7 +38,7 @@ const config = {
       user: DB_USER,
       password: DB_PASSWORD,
       host: DB_HOST,
-      port: DB_PORT
+      port: DB_PORT,
     },
     migrations: {
       directory: path.join(__dirname, '/server/db/migrations'),

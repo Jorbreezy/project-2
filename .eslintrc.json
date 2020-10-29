@@ -6,12 +6,20 @@
         "jest/globals": true
     },
     "extends": [
-        "airbnb-base"
+        "plugin:react/recommended",
+        "airbnb"
     ],
     "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
         "ecmaVersion": 12,
         "sourceType": "module"
     },
+    "plugins": [
+        "react",
+        "jest"
+    ],
     "rules": {
       "jest/no-disabled-tests": "warn",
       "jest/no-focused-tests": "error",
@@ -19,6 +27,5 @@
       "jest/prefer-to-have-length": "warn",
       "jest/valid-expect": "error",
       "implicit-arrow-linebreak": 0
-    },
-    "plugins": ["jest"]
+    }
 }

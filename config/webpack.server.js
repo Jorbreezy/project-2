@@ -1,37 +1,22 @@
 const path = require('path');
 
-const ServerConfig = {
-  entry: {
-    server: ['../server/index.js'],
-  },
+module.exports = {
   target: 'node',
+  entry: path.resolve(__dirname, '../src/server/server.js'),
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'server.js',
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
-        test: /\.(css|scss)$/,
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              exportOnlyLocals: true,
-              modules: true,
-              localIdentName: '[local]--[hash:base64:5]',
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
+        test: /\.(js|jsx)?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 };
-
-module.exports = ServerConfig;

@@ -14,7 +14,7 @@
     "db:rollback": "knex migrate:rollback",
     "webdev": "webpack serve  --config config/webpack.client.js --mode development --env development",
     "dev:build:server": "webpack --config config/webpack.server.js --mode development",
-    "run:dev:react": "nodemon --exec babel-node src/server/server.js"
+    "ssr:react": "node --exec babel-node src/server/server.js"
   },
   "author": "Jordan Kelly",
   "license": "ISC",

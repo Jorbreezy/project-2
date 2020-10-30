@@ -11,7 +11,10 @@
     "db:migrate": "knex migrate:latest",
     "db:seeds": "knex seed:run",
     "db:setup": "npm run db:migrate && npm run db:seeds",
-    "db:rollback": "knex migrate:rollback"
+    "db:rollback": "knex migrate:rollback",
+    "webdev": "webpack serve  --config config/webpack.client.js --mode development --env development",
+    "dev:build:server": "webpack --config config/webpack.server.js --mode development",
+    "ssr:react": "npx babel-node server/server.js"
   },
   "author": "Jordan Kelly",
   "license": "ISC",
@@ -19,7 +22,9 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.21.6",
-    "pg": "^8.4.2"
+    "pg": "^8.4.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
@@ -27,13 +32,24 @@
     "@babel/node": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "@loadable/babel-plugin": "^5.13.2",
+    "@loadable/webpack-plugin": "^5.14.0",
+    "babel-loader": "^8.1.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.1.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^4.5.0",
     "jest": "^26.6.1",
     "nock": "^13.0.4",
     "nodemon": "^2.0.6",
-    "supertest": "^5.0.0"
+    "supertest": "^5.0.0",
+    "webpack": "^5.3.2",
+    "webpack-cli": "^4.1.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }

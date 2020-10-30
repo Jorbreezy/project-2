@@ -12,11 +12,14 @@
     "db:seeds": "knex seed:run",
     "db:setup": "npm run db:migrate && npm run db:seeds",
     "db:rollback": "knex migrate:rollback",
-    "webdev": "webpack serve --mode development --env development"
+    "webdev": "webpack serve  --config config/webpack.client.js --mode development --env development",
+    "dev:build:server": "webpack --config config/webpack.server.js --mode development",
+    "run:dev:react": "nodemon --exec babel-node src/server/server.js"
   },
   "author": "Jordan Kelly",
   "license": "ISC",
   "dependencies": {
+    "@loadable/babel-plugin": "^5.13.2",
     "@loadable/webpack-plugin": "^5.14.0",
     "babel-loader": "^8.1.0",
     "dotenv": "^8.2.0",
@@ -26,7 +29,13 @@
     "pg": "^8.4.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0"
+    "react-redux": "^7.2.2",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "webpack-merge": "^5.2.0",
+    "webpack-node-externals": "^2.5.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",

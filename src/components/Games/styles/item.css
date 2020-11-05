@@ -1,0 +1,9 @@
+#details {
+  border: 1px solid;
+  max-width: 1200px;
+  margin: 15px auto;
+}
+
+.title {
+  text-align: center;
+}

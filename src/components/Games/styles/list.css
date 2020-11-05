@@ -1,0 +1,26 @@
+#itemWrapper {
+  max-width: 1200px;
+  margin: 15px auto;
+}
+
+.subtitle {
+  text-align: center;
+}
+
+.subtitle hr {
+  width: 50%;
+}
+
+.list {
+  border: 1px solid;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 15px auto;
+}
+
+.card {
+  width: fit-content;
+  cursor: pointer;
+}

@@ -1,0 +1,44 @@
+#header {
+  width: 100%;
+  border-bottom: 1px solid;
+  display: flex;
+  justify-content: space-between;
+}
+
+#icon {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#icon h1 {
+  font-size: 1.5rem;
+}
+
+.right {
+  margin-right: 5px;
+}
+
+#navUl {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+}
+
+#navUl li {
+  display: inline;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+#navUl li a {
+  text-decoration: none;
+  padding: 14px 16px;
+  vertical-align: middle;
+}
+
+#navUl li a:hover {
+  background-color: whitesmoke;
+}

@@ -1,4 +1,4 @@
-export default async (err, req, res, fn) => {
+export default async (err, req, res, next) => {
   const { code } = err;
   console.error('Error: ', code);
   if (code) {
@@ -12,6 +12,6 @@ export default async (err, req, res, fn) => {
     const httpStatusCode = codeStatusMap[code];
     return res.status(httpStatusCode || 500).send({ error: err.message || 'Something unexpected happened.' });
   }
-  console.error('UNEXPECTED ERROR:');
+  console.error('UNEXPECTED ERROR:', err);
   return res.status(500).send({ error: { message: 'Internal Server Error' } });
 };

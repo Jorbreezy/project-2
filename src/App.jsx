@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+
+import './style.css';
 
 import Games from './components/Games/List.jsx';
 import Game from './components/Games/Item.jsx';
@@ -8,7 +10,7 @@ import Makers from './components/Makers/List.jsx';
 import Maker from './components/Makers/Item.jsx';
 
 const App = () => (
-  <Router>
+  <>
     <Navbar />
     <Switch>
       <Route exact path={['/games', '/']} component={Games} />
@@ -16,7 +18,7 @@ const App = () => (
       <Route exact path='/makers' component={Makers} />
       <Route exact path='/makers/:id' component={Maker} />
     </Switch>
-  </Router>
+  </>
 );
 
 export default App;

@@ -23,8 +23,9 @@
       "jest/prefer-to-have-length": "warn",
       "jest/valid-expect": "error",
       "implicit-arrow-linebreak": 0,
-      "react/prop-types": 0
+      "react/prop-types": 0,
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/webpack.*.js", "*.test.js"]}]
     },
     "plugins": ["jest", "react"],
-    "ignorePatterns": ["dist"]
+    "ignorePatterns": ["dist", "public"]
 }

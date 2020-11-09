@@ -25,12 +25,18 @@ const List = () => {
   }, []);
 
   return (
-    <div className="list">
-      {
-        makers.map(({ id, name }) => (
-          <h2 key={name} onClick={() => redirectToItem(id)}>{name}</h2>
-        ))
-      }
+    <div id='itemWrapper'>
+      <div className='subtitle'>
+        <h1>Makers</h1>
+        <hr />
+      </div>
+      <div className="list">
+        {
+          makers.map(({ id, name }) => (
+            <h2 key={name} className='card' onClick={() => redirectToItem(id)}>{name}</h2>
+          ))
+        }
+      </div>
     </div>
   );
 };

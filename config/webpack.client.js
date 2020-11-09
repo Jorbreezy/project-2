@@ -1,28 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const ClientConfig = {
   mode: process.env.NODE_ENV,
   entry: path.resolve(__dirname, '../src/index.jsx'),
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../public'),
     publicPath: '/',
     filename: 'bundle.js',
-  },
-  devServer: {
-    host: 'localhost',
-    port: 8080,
-    contentBase: path.join(__dirname, 'dist'),
-    publicPath: '/',
-    hot: true,
-    inline: true,
-    historyApiFallback: true,
-    proxy: {
-      '/(api|assets|dist)/**': {
-        target: 'http://localhost:3000/',
-        secure: false,
-      },
-    },
   },
   module: {
     rules: [
@@ -32,9 +18,9 @@ const ClientConfig = {
         exclude: /node_modules/,
       },
       {
-        test: /.(css|scss)$/,
+        test: /\.(css|scss)?$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, { loader: 'css-loader' }],
       },
     ],
   },
@@ -42,6 +28,7 @@ const ClientConfig = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/index.html'),
     }),
+    new MiniCssExtractPlugin(),
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],

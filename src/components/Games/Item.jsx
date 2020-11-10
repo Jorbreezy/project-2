@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import './styles/item.css';
 
 const Item = ({ match }) => {
   const [game, setGame] = useState({});
+  const history = useHistory();
 
   const fetchItemData = async () => {
     const { params: { id } } = match;
@@ -13,6 +15,17 @@ const Item = ({ match }) => {
       const results = await res.json();
 
       setGame(results);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const deleteGame = async () => {
+    const { params: { id } } = match;
+
+    try {
+      await fetch(`/api/games/${id}`, { method: 'DELETE' });
+      history.push('/games');
     } catch (err) {
       console.error(err);
     }
@@ -32,6 +45,9 @@ const Item = ({ match }) => {
         <p>Publisher: {game.maker}</p>
         <p>Type: {game.type}</p>
         <p>Price: {game.price}</p>
+      </section>
+      <section>
+        <button onClick={deleteGame}>Button</button>
       </section>
     </div>
   );
